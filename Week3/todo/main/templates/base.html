@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BFDjango: To-Do List</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+</head>
+
+<body>
+<div class="header">
+	<h2 class="titl">BFDjango: To-Do List</h2>
+</div>
+
+
+
+<form class="content"> 
+	<input type="search" name="item">
+	<input type="date" name="due_on">
+	<button class="bttn1" type="submit">Add Task</button>
+</form>
+
+<div >
+	{% block content %}
+	{% endblock %}
+</div>
+
+
+</body>
+</html>
