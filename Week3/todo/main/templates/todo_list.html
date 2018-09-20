@@ -13,14 +13,14 @@
     <th>Owner</th>
     <th>Status</th>
   	</tr>
-	{% for i in numbers %}
+	{% for i in num %}
 	<tr>
 
 		<td>Task {{i}}</td>
 		<td>{{ created }}</td>
 		<td>{{due_on}}</td>
 		<td>{{owner}}</td>
-		<td>Not Done</td>
+		<td><button class="bttn3">Not Done</button></td>
 	</tr>
 	{% endfor %}
 	</table>
