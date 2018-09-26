@@ -15,12 +15,19 @@
   	</tr>
 	{% for t in tasks %}
 	<tr>
-
+		{% if user.is_superuser %}
 		<td>{{t.name}}</td>
-		<td>{{ created }}</td>
-		<td>{{due_on}}</td>
-		<td>{{owner}}</td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>Admin</td>
 		<td><button class="bttn3">Not Done</button></td>
+		{% else %}
+		<td>{{t.name}}</td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>User</td>
+		<td><button class="bttn3">Not Done</button></td>
+		{% endif %}
 	</tr>
 	{% endfor %}
 	</table>
