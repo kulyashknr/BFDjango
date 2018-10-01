@@ -4,25 +4,37 @@
 
 <div class="content">
 <h1>Completed tasks</h1>
+	{% if tasks %}
 	<table>
 	<tr>
-    <th>Task</th>
-    <th>Created</th>
-    <th>Due on</th>
-    <th>Owner</th>
-    <th>Status</th>
-  	</tr>
-	{% for i in num %}
+	<th>Task</th>
+	<th>Created</th>
+	<th>Due on</th>
+	<th>Owner</th>
+	<th>Status</th>
+	</tr>
+	{% for t in tasks %}
 	<tr>
-
-		<td>Task {{i}}</td>
-		<td>{{ created }}</td>
-		<td>{{due_on}}</td>
-		<td>{{owner}}</td>
-		<td><button class="bttn4">Done</button></td>
+		{% if t.status == True %}
+		{% if user.is_superuser %}
+		
+		<td>{{ t.name }}</td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>Admin</td>
+		<td><a href="{% url 'task_notdone' t.id %}"><button class="bttn4" >Done</button></a></td>
+		{% else %}
+		<td>{{ t.name }}</td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>User</td>
+		<td><a href="{% url 'task_notdone' t.id %}"><button class="bttn4" >Done</button></a></td>
+		{% endif %}
+		{% endif %}
 	</tr>
 	{% endfor %}
 	</table>
+{% endif %}
 
 <a href=""><button class="bttn3">Delete List</button></a>
 <a href="{% url 'todo_list' %}"><button class="bttn2">View incompleted tasks</button></a>
