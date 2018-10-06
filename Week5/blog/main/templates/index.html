@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+<h3>New post</h3>
+<form action="{% url 'index' %}" method="POST">
+	{% csrf_token %}
+	
+	<input class="form-control" name="title" type="text" style="margin-bottom: 10px" placeholder="Add title">
+	<input class="form-control" name="text" type="text" placeholder="Add text">
+	<br>
+  	<button type="submit" class="btn btn-primary">Post</button>
+</form>
+</div>
+
+{% endblock %}
