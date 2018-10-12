@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="content">
+<h1>Tasks</h1>
+{% if tasks %}
+	<table>
+	<tr>
+    <th>Task</th>
+    <th>Created</th>
+    <th>Due on</th>
+    <th>Owner</th>
+    <th>Status</th>
+    <th>Delete</th>
+  	</tr>
+	{% for t in tasks %}
+	<tr>
+		{% if t.status == False %}
+		{% if user.is_superuser %}
+		<td><a href="{% url 'edit_task' t.id %}">{{t.name}}</a></td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>Admin</td>
+		<td><a href="{% url 'task_done' t.id %}"><button class="bttn3" >Not Done</button></a></td>
+		{% else %}
+		<td><a href="{% url 'edit_task' t.id %}">{{t.name}}</a></td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>User</td>
+		<td><a href="{% url 'task_done' t.id %}"><button class="bttn3">Not Done</button></a></td>
+		<td><a href="{% url 'delete_task' t.id %}"><button class="bttn3">Delete</button></a></td>
+		{% endif %}
+		{% endif %}
+	</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+
+<a href="{% url 'delete_list' %}"><button class="bttn3">Delete List</button></a>
+<a href="{% url 'completed_todo_list' %}"><button class="bttn2">View completed tasks</button></a>
+</div>
+
+{% endblock %}
