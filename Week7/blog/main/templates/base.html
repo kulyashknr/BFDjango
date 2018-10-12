@@ -24,14 +24,13 @@
 			</li>
 			{% endif %}
 			{% if user.is_authenticated %}
-			<form action="{% url 'logout' %}" method="POST">
-				{% csrf_token %}
+			
 				<li class="nav-item">		
-					<a class="nav-link disabled" href="#">Log out</a>
+					<a class="nav-link disabled" href="{% url 'logout' %}">Log out</a>
 				</li>
 				</ul>		
 				<a style="color: white; margin-right: 10px">Welcome, {{ user }}!</a>
-			</form>
+		
 
 			{% else %}
 			<li class="nav-item">
