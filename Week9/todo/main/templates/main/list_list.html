@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<td><a href="{% url 'create_task' %}"><button class="bttn3"> Add Task </button></a></td>
+
+<div class="content">
+<h1>Tasks</h1>
+
+	<table>
+	<tr>
+    <th>Task</th>
+    <th>Created</th>
+    <th>Due on</th>
+    <th>Owner</th>
+    <th>Status</th>
+    <th>Delete</th>
+  	</tr>
+	{% for t in tasks %}
+	<tr>
+		{% if t.status == False %}
+		{% if user.is_superuser %}
+		<td>{{t.name}}</td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>Admin</td>
+		<td><a href="{% url 'done_task' t.id %}"><button class="bttn3" >Not Done</button></a></td>
+		{% else %}
+		<td>{{t.name}}</td>
+		<td>{{ t.create }}</td>
+		<td>{{ t.due }}</td>
+		<td>User</td>
+		<td><a href="{% url 'done_task' t.id %}"><button class="bttn3">Not Done</button></a></td>
+		<td><a href="{% url 'list_delete' t.id %} "><button class="bttn3">Delete</button></a></td>
+		{% endif %}
+		{% endif %}
+	</tr>
+	{% endfor %}
+	</table>
+
+
+<a href=""><button class="bttn3">Delete List</button></a>
+<a href="{% url 'listcomp_list' %}"><button class="bttn2">View completed tasks</button></a>
+</div>
+
+{% endblock %}
